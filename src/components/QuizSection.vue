@@ -108,7 +108,7 @@
         <div v-else></div>
 
         <!-- Next / Submit -->
-        <button
+        <!-- <button
           class="btn-primary"
           :disabled="!answers[currentIndex]"
           @click="advance"
@@ -133,7 +133,7 @@
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </span>
-        </button>
+        </button> -->
       </div>
 
       <!-- ── Auto-advance hint ── -->

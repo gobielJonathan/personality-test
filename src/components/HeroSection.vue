@@ -67,14 +67,7 @@
             <span class="text-2xl">⚠️</span>
             <span class="font-semibold text-sm tracking-wide">Important Disclaimer</span>
           </div>
-          <div
-            class="text-white/40 group-hover:text-white/70 transition-all duration-300"
-            :class="disclaimerOpen ? 'rotate-180' : 'rotate-0'"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </div>
+          
         </button>
         <Transition name="disclaimer">
           <div v-if="disclaimerOpen" class="px-5 pb-5">
@@ -102,24 +95,6 @@
               Simply choose the <span class="text-fuchsia-300 font-medium">first response that comes to your mind</span>.
             </p>
           </div>
-        </div>
-      </div>
-
-      <!-- ── Types preview ── -->
-      <div
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 550 } }"
-        class="grid grid-cols-2 sm:grid-cols-4 gap-3"
-      >
-        <div
-          v-for="type in typeTeaser"
-          :key="type.label"
-          class="glass-card p-3 text-center hover:scale-105 transition-transform duration-300 cursor-default"
-          :style="{ borderColor: type.color + '40' }"
-        >
-          <div class="text-2xl mb-1">{{ type.emoji }}</div>
-          <div class="text-xs font-semibold" :style="{ color: type.color }">{{ type.label }}</div>
         </div>
       </div>
 
@@ -163,13 +138,6 @@ defineEmits(['start'])
 
 const disclaimerOpen = ref(true)
 const btnHovered = ref(false)
-
-const typeTeaser = [
-  { emoji: '👀', label: 'The Observer',  color: '#818cf8' },
-  { emoji: '👂', label: 'The Safe Space', color: '#34d399' },
-  { emoji: '🔗', label: 'The Connector',  color: '#fbbf24' },
-  { emoji: '💚', label: 'The Steady One', color: '#f472b6' },
-]
 
 // generate random stars
 const stars = Array.from({ length: 50 }, (_, i) => ({
