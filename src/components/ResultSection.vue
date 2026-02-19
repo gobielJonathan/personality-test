@@ -23,7 +23,93 @@
             <p class="text-white/50 text-base font-medium tracking-widest uppercase mb-2">You are...</p>
           </div>
 
-          <img :src="primaryType.image" alt="">
+          <!-- ── Hero Image Card ── -->
+          <div
+          v-if="!isHybrid"
+            class="stagger-item relative rounded-3xl overflow-hidden group cursor-default"
+            style="animation-delay: 0.15s"
+            :style="{
+              boxShadow: `0 0 0 1px ${primaryType.color}30, 0 30px 80px ${primaryType.color}30, 0 0 120px ${primaryType.color}15`,
+            }"
+          >
+            <!-- image -->
+            <img
+              :src="primaryType.image"
+              :alt="primaryType.name"
+              class="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              style="max-height: 420px;"
+            />
+
+            <!-- bottom gradient overlay -->
+            <div
+              class="absolute inset-0 pointer-events-none"
+              :style="{
+                background: `linear-gradient(
+                  to bottom,
+                  transparent 35%,
+                  ${primaryType.color}18 65%,
+                  rgba(15,14,23,0.92) 100%
+                )`
+              }"
+            ></div>
+
+            <!-- top-left subtle glow scatter -->
+            <div
+              class="absolute -top-12 -left-12 w-48 h-48 rounded-full blur-3xl opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+              :style="{ background: primaryType.color }"
+            ></div>
+            <div
+              class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full blur-2xl opacity-20 pointer-events-none"
+              :style="{ background: primaryType.color }"
+            ></div>
+
+            <!-- bottom content overlay -->
+            <div class="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-12">
+              <div class="flex items-end justify-between gap-4">
+                <!-- type name + emoji -->
+                <div>
+                  <div
+                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-2 backdrop-blur-md"
+                    style="background: rgba(0,0,0,0.55); border: 1.5px solid rgba(255,255,255,0.18); color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5);"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" :style="{ background: primaryType.color }"></span>
+                    Your Care Type
+                  </div>
+                  <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">
+                    {{ primaryType.emoji }} {{ primaryType.name }}
+                  </h2>
+                  <p class="text-white/80 text-sm mt-1 font-medium italic" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">
+                    "{{ primaryType.title }}"
+                  </p>
+                </div>
+
+                <!-- percentage badge (only for hybrid) -->
+                <div
+                  class="flex-shrink-0 flex flex-col items-center justify-center w-16 h-16 rounded-2xl backdrop-blur-md font-extrabold text-lg"
+                  style="background: rgba(0,0,0,0.55); border: 1.5px solid rgba(255,255,255,0.22); color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5);"
+                >
+                  {{ primaryType.pct }}%
+                </div>
+              </div>
+            </div>
+
+            <!-- decorative corner sparkles -->
+            <div class="absolute top-4 right-4 flex gap-1.5 pointer-events-none">
+              <span
+                v-for="n in 3" :key="n"
+                class="rounded-full"
+                :style="{
+                  width: (5 - n) + 'px',
+                  height: (5 - n) + 'px',
+                  background: primaryType.color,
+                  opacity: 0.6 - (n * 0.15),
+                  animation: `twinkle ${1.5 + n * 0.4}s ease-in-out infinite`,
+                  animationDelay: (n * 0.3) + 's',
+                }"
+              ></span>
+            </div>
+
+          </div>
 
           <!-- ── Main Result / Hybrid ── -->
           <div v-if="!isHybrid" class="stagger-item" style="animation-delay: 0.2s">

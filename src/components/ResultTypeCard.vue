@@ -12,8 +12,8 @@
 
     <div class="p-6 sm:p-8 space-y-5">
 
-      <!-- ── Header ── -->
-      <div class="flex items-start justify-between gap-4">
+      <!-- ── Header (hidden for primary since image banner already shows it) ── -->
+      <div v-if="!isPrimary" class="flex items-start justify-between gap-4">
         <div class="flex items-center gap-4">
           <!-- emoji ring -->
           <div
