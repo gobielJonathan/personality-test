@@ -94,7 +94,7 @@
         class="flex items-center justify-between gap-4"
       >
         <!-- Back -->
-        <button
+        <!-- <button
           v-if="currentIndex > 0"
           class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-all duration-200 text-sm font-medium"
           @click="goBack"
@@ -105,7 +105,7 @@
           </svg>
           Back
         </button>
-        <div v-else></div>
+        <div v-else></div> -->
 
         <!-- Next / Submit -->
         <!-- <button
