@@ -25,7 +25,7 @@
 
           <!-- ── Hero Image Card ── -->
           <div
-          v-if="!isHybrid"
+            v-if="!isHybrid"
             class="stagger-item relative rounded-3xl overflow-hidden group cursor-default"
             style="animation-delay: 0.15s"
             :style="{
@@ -76,7 +76,7 @@
                     Your Care Type
                   </div>
                   <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">
-                    {{ primaryType.emoji }} {{ primaryType.name }}
+                    {{ primaryType.name }}
                   </h2>
                   <p class="text-white/80 text-sm mt-1 font-medium italic" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">
                     "{{ primaryType.title }}"
@@ -201,7 +201,6 @@ const TYPE_DATA = {
     actions: [
       "Send a simple check-in: \"Hey, you crossed my mind today — how are you?\"",
       "Mention what you notice kindly: \"You seem quieter lately, I'm here if you want to talk.\"",
-      "Start with light conversations before going deeper.",
     ],
     tip: "Small check-ins often mean more than perfect words.",
     image: ObserverImage,
@@ -219,11 +218,10 @@ const TYPE_DATA = {
     challenge: "Just remember: you don't have to carry everyone's emotions alone.",
     actions: [
       "Ask yourself after deep talks: \"Do I need a recharge?\"",
-      "Set gentle boundaries: \"I want to listen, but can we talk later when I'm more present?\"",
       "Balance listening with sharing a little about yourself too.",
     ],
     tip: "Protecting your energy helps you stay a safe space long-term.",
-    image: ConnectorImage,
+    image: SafePlaceImage,
   },
   C: {
     key: 'C',
@@ -238,11 +236,10 @@ const TYPE_DATA = {
     challenge: "Slow down just enough to listen first — your solutions become even stronger after that.",
     actions: [
       "Start with: \"Do you want me to just listen, or help think of solutions?\"",
-      "Pause for a moment before giving advice.",
       "Reflect what you heard first: \"That sounds really heavy.\"",
     ],
     tip: "When people feel heard first, your practical help becomes even more powerful.",
-    image: SafePlaceImage,
+    image: ConnectorImage,
   },
   D: {
     key: 'D',
@@ -257,7 +254,6 @@ const TYPE_DATA = {
     challenge: "Sometimes others don't realize how much you care — small check-ins help them feel it more.",
     actions: [
       "Send simple follow-ups: \"How are you feeling today?\"",
-      "Initiate low-pressure hangouts like coffee or short walks.",
       "Say supportive things out loud, even briefly: \"I'm really glad you told me.\"",
     ],
     tip: "Small initiations help others recognize the support you quietly give.",
