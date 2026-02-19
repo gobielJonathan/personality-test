@@ -68,18 +68,11 @@
               <div class="flex items-end justify-between gap-4">
                 <!-- type name + emoji -->
                 <div>
-                  <div
-                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-2 backdrop-blur-md"
-                    style="background: rgba(0,0,0,0.55); border: 1.5px solid rgba(255,255,255,0.18); color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5);"
-                  >
-                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" :style="{ background: primaryType.color }"></span>
-                    Your Care Type
-                  </div>
                   <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">
                     {{ primaryType.name }}
                   </h2>
                   <p class="text-white/80 text-sm mt-1 font-medium italic" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">
-                    "{{ primaryType.title }}"
+                    {{ primaryType.title }}
                   </p>
                 </div>
 
