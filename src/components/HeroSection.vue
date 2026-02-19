@@ -69,7 +69,7 @@
         <span class="text-white font-bold text-base tracking-wide">Disclaimer</span>
         </button>
         <Transition name="disclaimer">
-          <div v-if="disclaimerOpen" class="pb-5">
+          <div v-if="disclaimerOpen" class="">
             <p class="text-white/60 text-sm leading-relaxed">
               This assessment is not meant to provide a clinical diagnosis. Instead, it's designed to give you a clearer picture of your strengths, highlight what you're already doing well, and point out areas that you can continue to grow and develop.
             </p>
