@@ -56,26 +56,29 @@
         v-motion
         :initial="{ opacity: 0, y: 30 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 250 } }"
-        class="glass-card text-left"
+        class="glass-card p-6 text-left"
       >
-        <button
+      <div class="flex items-start gap-4">
+ <span class="text-2xl">⚠️</span>
+            <div>
+<button
           @click="disclaimerOpen = !disclaimerOpen"
-          class="w-full p-5 flex items-center justify-between gap-3 text-white/80 hover:text-white transition-colors duration-200 group"
+          class="w-full flex items-center justify-between gap-3 text-white/80 hover:text-white transition-colors duration-200 group mb-2"
           :aria-expanded="disclaimerOpen"
         >
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">⚠️</span>
-            <span class="text-white font-bold text-base tracking-wide">Disclaimer</span>
-          </div>
-          
+        <span class="text-white font-bold text-base tracking-wide">Disclaimer</span>
         </button>
         <Transition name="disclaimer">
-          <div v-if="disclaimerOpen" class="px-5 pb-5">
-            <p class="text-white/60 text-sm leading-relaxed border-t border-white/10 pt-4">
+          <div v-if="disclaimerOpen" class="pb-5">
+            <p class="text-white/60 text-sm leading-relaxed">
               This assessment is not meant to provide a clinical diagnosis. Instead, it's designed to give you a clearer picture of your strengths, highlight what you're already doing well, and point out areas that you can continue to grow and develop.
             </p>
           </div>
         </Transition>
+            </div>
+      </div>
+           
+        
       </div>
 
       <!-- ── Instructions ── -->
