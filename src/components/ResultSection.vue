@@ -15,7 +15,6 @@
         </div>
 
         <div v-else key="result" class="space-y-6">
-
           <!-- ── "You are..." label ── -->
           <div
             class="stagger-item text-center"
@@ -23,6 +22,8 @@
           >
             <p class="text-white/50 text-base font-medium tracking-widest uppercase mb-2">You are...</p>
           </div>
+
+          <img :src="primaryType.image" alt="">
 
           <!-- ── Main Result / Hybrid ── -->
           <div v-if="!isHybrid" class="stagger-item" style="animation-delay: 0.2s">
@@ -89,6 +90,10 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import confetti from 'canvas-confetti'
 import ResultTypeCard from './ResultTypeCard.vue'
+import ObserverImage from '../assets/observer.jpeg'
+import ConnectorImage from '../assets/connector.jpeg'
+import SafePlaceImage from '../assets/safe-space.jpeg'
+import SteadyImage from '../assets/steady.jpeg'
 
 const props = defineProps({
   counts: { type: Object, required: true }, // { A: n, B: n, C: n, D: n }
@@ -113,6 +118,7 @@ const TYPE_DATA = {
       "Start with light conversations before going deeper.",
     ],
     tip: "Small check-ins often mean more than perfect words.",
+    image: ObserverImage,
   },
   B: {
     key: 'B',
@@ -131,6 +137,7 @@ const TYPE_DATA = {
       "Balance listening with sharing a little about yourself too.",
     ],
     tip: "Protecting your energy helps you stay a safe space long-term.",
+    image: ConnectorImage,
   },
   C: {
     key: 'C',
@@ -149,6 +156,7 @@ const TYPE_DATA = {
       "Reflect what you heard first: \"That sounds really heavy.\"",
     ],
     tip: "When people feel heard first, your practical help becomes even more powerful.",
+    image: SafePlaceImage,
   },
   D: {
     key: 'D',
@@ -167,6 +175,7 @@ const TYPE_DATA = {
       "Say supportive things out loud, even briefly: \"I'm really glad you told me.\"",
     ],
     tip: "Small initiations help others recognize the support you quietly give.",
+    image: SteadyImage,
   },
 }
 

@@ -65,7 +65,7 @@
         >
           <div class="flex items-center gap-3">
             <span class="text-2xl">⚠️</span>
-            <span class="font-semibold text-sm tracking-wide">Important Disclaimer</span>
+            <span class="text-white font-bold text-base tracking-wide">Important Disclaimer</span>
           </div>
           
         </button>
