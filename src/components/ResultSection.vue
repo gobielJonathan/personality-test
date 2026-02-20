@@ -25,7 +25,6 @@
 
           <!-- ── Hero Image Card ── -->
           <div
-            v-if="!isHybrid"
             class="stagger-item relative rounded-3xl overflow-hidden group cursor-default"
             style="animation-delay: 0.15s"
             :style="{
@@ -34,8 +33,8 @@
           >
             <!-- image -->
             <img
-              :src="primaryType.image"
-              :alt="primaryType.name"
+              :src="displayImage"
+              :alt="isHybrid ? 'Hybrid Type' : primaryType.name"
               class="w-full object-cover transition-transform duration-700 group-hover:scale-105"
               style="max-height: 420px;"
             />
@@ -69,7 +68,10 @@
                 <!-- type name + emoji -->
                 <div>
                   <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">
-                    {{ primaryType.name }}
+                    <template v-if="isHybrid">
+                      {{ sortedTypes[0].name.replace(/^The /, '') }} <span class="font-light opacity-60">×</span> {{ sortedTypes[1].name.replace(/^The /, '') }}
+                    </template>
+                    <template v-else>{{ primaryType.name.replace(/^The /, '') }}</template>
                   </h2>
                   <p class="text-white/80 text-sm mt-1 font-medium italic" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">
                     {{ primaryType.title }}
@@ -169,10 +171,30 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import confetti from 'canvas-confetti'
 import ResultTypeCard from './ResultTypeCard.vue'
-import ObserverImage from '../assets/observer.jpeg'
-import ConnectorImage from '../assets/connector.jpeg'
-import SafePlaceImage from '../assets/safe-space.jpeg'
-import SteadyImage from '../assets/steady.jpeg'
+
+
+import ObserverImage from '../assets/The Observer HD.png'
+import ConnectorImage from '../assets/The Connector.png'
+import SafePlaceImage from '../assets/The Safe Space HD.png'
+import SteadyImage from '../assets/The Steady One.png'
+
+// Hybrid pair images (key = sorted type keys joined, e.g. AB, AC, AD, BC, BD, CD)
+import HybridAB from '../assets/The Observer X The Safe Space.png'
+import HybridAC from '../assets/The Observer x The Connector.png'
+import HybridAD from '../assets/The Observer x The Steady One.png'
+import HybridBC from '../assets/The Safe Space x The Connector.png'
+import HybridBD from '../assets/The Safe Space x The Steady One.png'
+import HybridCD from '../assets/The Connector x The Steady One.png'
+
+const HYBRID_IMAGES = {
+  AB: HybridAB,
+  AC: HybridAC,
+  AD: HybridAD,
+  BC: HybridBC,
+  BD: HybridBD,
+  CD: HybridCD,
+}
+
 
 const props = defineProps({
   counts: { type: Object, required: true }, // { A: n, B: n, C: n, D: n }
@@ -276,6 +298,13 @@ const isHybrid = computed(() => {
 })
 
 const primaryType = computed(() => sortedTypes.value[0])
+
+// For hybrid, derive the image from the top-2 type keys sorted alphabetically
+const displayImage = computed(() => {
+  if (!isHybrid.value) return primaryType.value.image
+  const top2 = sortedTypes.value.slice(0, 2).map(t => t.key).sort().join('')
+  return HYBRID_IMAGES[top2] ?? primaryType.value.image
+})
 
 const hybridTypes = computed(() =>
   sortedTypes.value.filter((t, i) => {
