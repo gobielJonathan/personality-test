@@ -74,7 +74,7 @@
                     <template v-else>{{ primaryType.name.replace(/^The /, '') }}</template>
                   </h2>
                   <p class="text-white/80 text-sm mt-1 font-medium italic" style="text-shadow: 0 1px 6px rgba(0,0,0,0.6);">
-                    {{ primaryType.title }}
+                    {{ displayTitle }}
                   </p>
                 </div>
 
@@ -299,11 +299,26 @@ const isHybrid = computed(() => {
 
 const primaryType = computed(() => sortedTypes.value[0])
 
+const HYBRID_TIPS = {
+  AB: 'You sense when someone is struggling and create a space where they feel safe to share.',
+  AC: 'You notice early signs of distress and help connect people to the support they need.',
+  AD: 'You stay grounded in difficult moments and help others feel less overwhelmed.',
+  BC: 'You offer emotional safety and guide others toward real help and healing.',
+  BD: 'Your calm, accepting presence helps others feel secure during tough times.',
+  CD: 'You respond to challenges with steady care and help move people toward support.',
+}
+
 // For hybrid, derive the image from the top-2 type keys sorted alphabetically
 const displayImage = computed(() => {
   if (!isHybrid.value) return primaryType.value.image
   const top2 = sortedTypes.value.slice(0, 2).map(t => t.key).sort().join('')
   return HYBRID_IMAGES[top2] ?? primaryType.value.image
+})
+
+const displayTitle = computed(() => {
+  if (!isHybrid.value) return primaryType.value.title
+  const top2 = sortedTypes.value.slice(0, 2).map(t => t.key).sort().join('')
+  return HYBRID_TIPS[top2] ?? primaryType.value.title
 })
 
 const hybridTypes = computed(() =>
