@@ -295,12 +295,9 @@ const sortedTypes = computed(() =>
   [...allTypes.value].sort((a, b) => b.count - a.count)
 )
 
-const threshold = computed(() => (total.value * 0.75))
-
-const isHybrid = computed(() => {
-  const top = sortedTypes.value[0]
-  return top.count < threshold.value
-})
+const isHybrid = computed(() =>
+  sortedTypes.value.filter(t => t.pct > 30).length >= 2
+)
 
 const primaryType = computed(() => sortedTypes.value[0])
 
@@ -327,11 +324,7 @@ const displayTitle = computed(() => {
 })
 
 const hybridTypes = computed(() =>
-  sortedTypes.value.filter((t, i) => {
-    // include all types that are tied or close to the top
-    const top = sortedTypes.value[0].count
-    return t.count === top || (i < 3 && t.count >= top - 1 && t.count > 0)
-  })
+  sortedTypes.value.filter(t => t.pct > 30)
 )
 
 // animated bar widths
