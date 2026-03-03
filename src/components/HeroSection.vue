@@ -31,7 +31,7 @@
           <span class="pulse-ring absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3 bg-violet-400"></span>
         </span>
-        <span class="text-violet-300 text-sm font-medium tracking-widest uppercase">Self-Discovery Assessment</span>
+        <span class="text-violet-300 text-sm font-medium tracking-widest uppercase">{{ t.eyebrow }}</span>
       </div>
 
       <!-- ── Title ── -->
@@ -41,13 +41,13 @@
         :enter="{ opacity: 1, y: 0, transition: { duration: 700, delay: 100 } }"
       >
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight">
-          <span class="text-white">Unlock Your</span><br />
+          <span class="text-white">{{ t.heroTitle1 }}</span><br />
           <span class="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-            Care Type
+            {{ t.heroTitle2 }}
           </span>
         </h1>
         <p class="mt-4 text-white/40 text-base font-medium">
-          8 questions &nbsp;·&nbsp; ~3 minutes &nbsp;·&nbsp; 4 unique types
+          {{ t.heroMeta }}
         </p>
       </div>
 
@@ -66,12 +66,12 @@
           class="w-full flex items-center justify-between gap-3 text-white/80 hover:text-white transition-colors duration-200 group mb-2"
           :aria-expanded="disclaimerOpen"
         >
-        <span class="text-white font-bold text-base tracking-wide">Disclaimer</span>
+        <span class="text-white font-bold text-base tracking-wide">{{ t.disclaimerLabel }}</span>
         </button>
         <Transition name="disclaimer">
           <div v-if="disclaimerOpen" class="">
             <p class="text-white/60 text-sm leading-relaxed">
-              This assessment is not meant to provide a clinical diagnosis. Instead, it's designed to give you a clearer picture of your strengths, highlight what you're already doing well, and point out areas that you can continue to grow and develop.
+              {{ t.disclaimerText }}
             </p>
           </div>
         </Transition>
@@ -91,11 +91,10 @@
         <div class="flex items-start gap-4">
           <div class="mt-0.5 text-2xl flex-shrink-0">📋</div>
           <div>
-            <h2 class="text-white font-bold text-base mb-2">How it works</h2>
+            <h2 class="text-white font-bold text-base mb-2">{{ t.howItWorksTitle }}</h2>
             <p class="text-white/60 text-sm leading-relaxed">
-              Choose the answer that <span class="text-violet-300 font-medium">best describes you</span> when facing the following situations.
-              There are no right or wrong answers, so don't overthink or spend too much time deciding.
-              Simply choose the <span class="text-fuchsia-300 font-medium">first response that comes to your mind</span>.
+              {{ t.howItWorksBody1 }} <span class="text-violet-300 font-medium">{{ t.howItWorksBodyHighlight1 }}</span> {{ t.howItWorksBody2 }}
+              <span class="text-fuchsia-300 font-medium">{{ t.howItWorksBodyHighlight2 }}</span>.
             </p>
           </div>
         </div>
@@ -115,7 +114,7 @@
           @mouseleave="btnHovered = false"
         >
           <span class="flex items-center gap-2">
-            Discover Your Type
+            {{ t.ctaButton }}
             <svg
               class="transition-transform duration-300"
               :class="btnHovered ? 'translate-x-1' : ''"
@@ -136,8 +135,11 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useLanguage } from '../composables/useLanguage.js'
 
 defineEmits(['start'])
+
+const { t } = useLanguage()
 
 const disclaimerOpen = ref(true)
 const btnHovered = ref(false)

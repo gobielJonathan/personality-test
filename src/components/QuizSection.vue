@@ -10,8 +10,8 @@
         class="space-y-3"
       >
         <div class="flex items-center justify-between text-sm">
-          <span class="text-white/40 font-medium">Question {{ currentIndex + 1 }} of {{ questions.length }}</span>
-          <span class="text-violet-300 font-semibold">{{ Math.round(progressPercent) }}% done</span>
+          <span class="text-white/40 font-medium">{{ t.questionOf.replace('{current}', currentIndex + 1).replace('{total}', questions.length) }}</span>
+          <span class="text-violet-300 font-semibold">{{ t.percentDone.replace('{n}', Math.round(progressPercent)) }}</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" :style="{ width: progressPercent + '%' }"></div>
@@ -142,7 +142,7 @@
           v-if="showHint && !answers[currentIndex]"
           class="text-center text-white/30 text-xs"
         >
-          Select an answer to continue
+          {{ t.selectToContinue }}
         </p>
       </Transition>
 
@@ -152,6 +152,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useLanguage } from '../composables/useLanguage.js'
 
 const emit = defineEmits(['done'])
 
@@ -230,15 +231,16 @@ const QUESTIONS = [
   },
 ]
 
-const questions = QUESTIONS
+const { t } = useLanguage()
+const questions = computed(() => t.value.questions)
 const currentIndex = ref(0)
 const answers = ref({})
 const showHint = ref(false)
 const autoAdvancing = ref(false)
 
-const current = computed(() => questions[currentIndex.value])
-const isLast   = computed(() => currentIndex.value === questions.length - 1)
-const progressPercent = computed(() => (currentIndex.value / questions.length) * 100)
+const current = computed(() => questions.value[currentIndex.value])
+const isLast   = computed(() => currentIndex.value === questions.value.length - 1)
+const progressPercent = computed(() => (currentIndex.value / questions.value.length) * 100)
 
 const typeColor = (val) => {
   return { A: '#818cf8', B: '#34d399', C: '#fbbf24', D: '#f472b6' }[val]

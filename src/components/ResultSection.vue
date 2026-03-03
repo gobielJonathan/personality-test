@@ -6,7 +6,7 @@
       <Transition name="section" mode="out-in">
         <div v-if="revealing" key="revealing" class="text-center space-y-4 py-20">
           <div class="text-6xl animate-bounce">✨</div>
-          <p class="text-white/60 text-lg font-medium shimmer rounded-lg px-4 py-2">Calculating your care type...</p>
+          <p class="text-white/60 text-lg font-medium shimmer rounded-lg px-4 py-2">{{ t.calculating }}</p>
           <div class="flex items-center justify-center gap-2">
             <div v-for="i in 3" :key="i" class="w-2 h-2 rounded-full bg-violet-400"
               :style="{ animation: `pulse-ring 1.2s ease-in-out ${(i-1)*0.2}s infinite` }"
@@ -20,7 +20,7 @@
             class="stagger-item text-center"
             style="animation-delay: 0.1s"
           >
-            <p class="text-white/50 text-base font-medium tracking-widest uppercase mb-2">You are...</p>
+            <p class="text-white/50 text-base font-medium tracking-widest uppercase mb-2">{{ t.youAre }}</p>
           </div>
 
           <!-- ── Hero Image Card ── -->
@@ -114,8 +114,8 @@
           <!-- Hybrid types -->
           <div v-else class="space-y-4">
             <div class="stagger-item text-center" style="animation-delay: 0.15s">
-              <h2 class="text-3xl sm:text-4xl font-extrabold text-white">You're a Hybrid Type ✨</h2>
-              <p class="text-white/50 mt-1 text-sm">You blend multiple care styles equally well</p>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-white">{{ t.hybridTitle }}</h2>
+              <p class="text-white/50 mt-1 text-sm">{{ t.hybridSubtitle }}</p>
             </div>
             <div
               v-for="(type, idx) in hybridTypes"
@@ -129,19 +129,19 @@
 
           <!-- ── Score breakdown ── -->
           <div class="stagger-item glass-card p-5 space-y-3" style="animation-delay: 0.45s">
-            <p class="text-white/40 text-xs font-semibold tracking-widest uppercase mb-1">Your score breakdown</p>
-            <div v-for="t in allTypes" :key="t.key" class="space-y-1">
+            <p class="text-white/40 text-xs font-semibold tracking-widest uppercase mb-1">{{ t.scoreBreakdown }}</p>
+            <div v-for="typeItem in allTypes" :key="typeItem.key" class="space-y-1">
               <div class="flex items-center justify-between text-sm">
                 <span class="flex items-center gap-2">
-                  <span>{{ t.emoji }}</span>
-                  <span class="text-white/70 font-medium">{{ t.name }}</span>
+                  <span>{{ typeItem.emoji }}</span>
+                  <span class="text-white/70 font-medium">{{ typeItem.name }}</span>
                 </span>
-                <span class="font-bold" :style="{ color: t.color }">{{ t.pct }}%</span>
+                <span class="font-bold" :style="{ color: typeItem.color }">{{ typeItem.pct }}%</span>
               </div>
               <div class="progress-track" style="height: 7px;">
                 <div
                   class="hybrid-bar"
-                  :style="{ width: barWidths[t.key] + '%', background: t.color, boxShadow: `0 0 8px ${t.color}60` }"
+                  :style="{ width: barWidths[typeItem.key] + '%', background: typeItem.color, boxShadow: `0 0 8px ${typeItem.color}60` }"
                 ></div>
               </div>
             </div>
@@ -157,7 +157,7 @@
                 <polyline points="1 4 1 10 7 10"></polyline>
                 <path d="M3.51 15a9 9 0 1 0 .49-5.64"></path>
               </svg>
-              Retake Assessment
+              {{ t.retake }}
             </button>
           </div>
 
@@ -171,6 +171,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import confetti from 'canvas-confetti'
 import ResultTypeCard from './ResultTypeCard.vue'
+import { useLanguage } from '../composables/useLanguage.js'
 
 
 import ObserverImage from '../assets/The Observer HD.png'
@@ -200,6 +201,8 @@ const props = defineProps({
   counts: { type: Object, required: true }, // { A: n, B: n, C: n, D: n }
 })
 defineEmits(['retake'])
+
+const { t } = useLanguage()
 
 const TYPE_DATA = {
   A: {
@@ -281,6 +284,8 @@ const total = computed(() => Object.values(props.counts).reduce((a, b) => a + b,
 const allTypes = computed(() =>
   ['A', 'B', 'C', 'D'].map(k => ({
     ...TYPE_DATA[k],
+    name: t.value.typeNames[k],
+    ...t.value.types[k],
     count: props.counts[k] || 0,
     pct: Math.round(((props.counts[k] || 0) / total.value) * 100),
   }))
@@ -317,8 +322,8 @@ const displayImage = computed(() => {
 
 const displayTitle = computed(() => {
   if (!isHybrid.value) return primaryType.value.title
-  const top2 = sortedTypes.value.slice(0, 2).map(t => t.key).sort().join('')
-  return HYBRID_TIPS[top2] ?? primaryType.value.title
+  const top2 = sortedTypes.value.slice(0, 2).map(tp => tp.key).sort().join('')
+  return t.value.hybridTips[top2] ?? primaryType.value.title
 })
 
 const hybridTypes = computed(() =>

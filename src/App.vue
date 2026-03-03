@@ -9,8 +9,14 @@
     <!-- ── Section Transitions ── -->
     <Transition name="section" mode="out-in">
 
+      <LanguageSelect
+        v-if="screen === 'lang'"
+        key="lang"
+        @done="goHero"
+      />
+
       <HeroSection
-        v-if="screen === 'hero'"
+        v-else-if="screen === 'hero'"
         key="hero"
         @start="startQuiz"
       />
@@ -38,7 +44,7 @@
       :enter="{ opacity: 1, transition: { delay: 1200, duration: 600 } }"
       class="fixed bottom-4 left-0 right-0 text-center text-white/20 text-xs pointer-events-none"
     >
-      Made with care &nbsp;·&nbsp; Not a clinical tool
+      {{ t.footer }}
     </footer>
 
   </div>
@@ -46,12 +52,21 @@
 
 <script setup>
 import { ref } from 'vue'
-import HeroSection   from './components/HeroSection.vue'
-import QuizSection   from './components/QuizSection.vue'
-import ResultSection from './components/ResultSection.vue'
+import { useLanguage } from './composables/useLanguage.js'
+import LanguageSelect from './components/LanguageSelect.vue'
+import HeroSection    from './components/HeroSection.vue'
+import QuizSection    from './components/QuizSection.vue'
+import ResultSection  from './components/ResultSection.vue'
 
-const screen       = ref('hero')
+const { t } = useLanguage()
+
+const screen       = ref('lang')
 const resultCounts = ref({ A: 0, B: 0, C: 0, D: 0 })
+
+function goHero() {
+  screen.value = 'hero'
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 
 function startQuiz() {
   screen.value = 'quiz'
@@ -65,7 +80,7 @@ function showResult(counts) {
 }
 
 function retake() {
-  screen.value = 'hero'
+  screen.value = 'lang'
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>

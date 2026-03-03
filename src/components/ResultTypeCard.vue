@@ -55,7 +55,7 @@
           ⚡
         </div>
         <div>
-          <p class="text-white/40 text-xs uppercase tracking-wider">Your quiet superpower</p>
+          <p class="text-white/40 text-xs uppercase tracking-wider">{{ t.yourQuietSuperpower }}</p>
           <p class="font-bold" :style="{ color: type.color }">{{ type.superpower }}</p>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
       <!-- ── Small Actions ── -->
       <div class="space-y-2">
-        <p class="text-white/40 text-xs uppercase tracking-wider font-semibold">✨ Small actions you can try</p>
+        <p class="text-white/40 text-xs uppercase tracking-wider font-semibold">{{ t.smallActions }}</p>
         <ul class="space-y-2">
           <li
             v-for="(action, i) in type.actions"
@@ -99,6 +99,8 @@
 </template>
 
 <script setup>
+import { useLanguage } from '../composables/useLanguage.js'
+const { t } = useLanguage()
 defineProps({
   type: { type: Object, required: true },
   isPrimary: { type: Boolean, default: false },
