@@ -27,7 +27,7 @@ export default {
   youAre: 'Kamu adalah...',
   yourCareType: 'Tipe Kepedulianmu',
   hybridTitle: 'Kamu Adalah Tipe Hybrid ✨',
-  hybridSubtitle: 'Kamu memadukan beberapa gaya kepedulian dengan baik',
+  hybridSubtitle: 'Kamu memadukan beberapa gaya kepedulian berikut',
   scoreBreakdown: 'Rincian skor kamu',
   retake: 'Ulangi Asesmen',
 
@@ -40,7 +40,7 @@ export default {
   },
 
   // ── Result card UI ───────────────────────────────
-  yourQuietSuperpower: 'Kekuatan terdalam kamu',
+  yourQuietSuperpower: 'Kekuatan khas kamu',
   smallActions: '✨ Hal kecil yang bisa kamu coba',
 
   // ── Questions ────────────────────────────────────
