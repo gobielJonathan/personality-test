@@ -1,8 +1,8 @@
 export default {
   // ── Hero ─────────────────────────────────────────
   eyebrow: 'Asesmen Kenali Dirimu',
-  heroTitle1: 'Temukan Tipe',
-  heroTitle2: 'Kepedulianmu',
+  heroTitle1: 'Unlock Your',
+  heroTitle2: 'Care Type',
   heroMeta: '8 pertanyaan · ~3 menit · 4 tipe unik',
   disclaimerLabel: 'Informasi Penting',
   disclaimerText:

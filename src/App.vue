@@ -36,29 +36,15 @@
 
     </Transition>
 
-    <!-- ── Subtle footer ── -->
-    <footer
-      v-if="screen === 'hero'"
-      v-motion
-      :initial="{ opacity: 0 }"
-      :enter="{ opacity: 1, transition: { delay: 1200, duration: 600 } }"
-      class="fixed bottom-4 left-0 right-0 text-center text-white/20 text-xs pointer-events-none"
-    >
-      {{ t.footer }}
-    </footer>
-
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useLanguage } from './composables/useLanguage.js'
 import LanguageSelect from './components/LanguageSelect.vue'
 import HeroSection    from './components/HeroSection.vue'
 import QuizSection    from './components/QuizSection.vue'
 import ResultSection  from './components/ResultSection.vue'
-
-const { t } = useLanguage()
 
 const screen       = ref('lang')
 const resultCounts = ref({ A: 0, B: 0, C: 0, D: 0 })
