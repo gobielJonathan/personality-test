@@ -1,6 +1,6 @@
 <template>
   <div class="relative min-h-screen">
-
+<Analytics />
     <!-- ── Animated background orbs ── -->
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
@@ -41,10 +41,12 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Analytics } from '@vercel/analytics/vue';
 import LanguageSelect from './components/LanguageSelect.vue'
 import HeroSection    from './components/HeroSection.vue'
 import QuizSection    from './components/QuizSection.vue'
 import ResultSection  from './components/ResultSection.vue'
+
 
 const screen       = ref('lang')
 const resultCounts = ref({ A: 0, B: 0, C: 0, D: 0 })
